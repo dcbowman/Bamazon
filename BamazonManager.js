@@ -36,7 +36,10 @@ function mgrAction(){
 }//end of mgrAction
 
 function viewItems(){
-	console.log("view");
+	connection.query('SELECT * FROM Products',function(err,res){
+	for(var i=0;i<res.length;i++){
+		console.log(res[i].ProductName+" | "+res[i].DepartmentName+" | "+ "$"+res[i].Price+" | "+res[i].StockQuantity +" on hand");} //will list all of the items available pretty
+	console.log("-----------------------------------");})
 
 	mgrAction();
 }
