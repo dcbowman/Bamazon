@@ -24,7 +24,7 @@ order();
 function order(){
 inquirer.prompt([{
         type: 'input',
-        message: 'What is the ID of the item you wish to purchase?',
+        message: 'Which item would you like to purchase?',
         name: 'itemId'
        },{
        	type:'input',
@@ -36,17 +36,19 @@ inquirer.prompt([{
         connection.query('SELECT * FROM Products WHERE ProductName = ?', answers.itemId, function(err,res){
           if(err) throw err;
 
-          console.log(res);//
+          //console.log(res);
   
-       checks to see if the quantity is enough
+       //checks to see if the quantity is enough
 
-          if (quantity > res[0].StockQuantiy){
+          if (answers.quantity >= res[0].StockQuantity){
             console.log("Sorry! Not enough to complete order! Select a different amount");
 
             //restarts
             order();
           }else{
             console.log("cool");
+
+
           }
 
 
