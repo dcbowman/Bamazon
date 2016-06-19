@@ -41,13 +41,18 @@ function viewItems(){
 		console.log(res[i].ProductName+" | "+res[i].DepartmentName+" | "+ "$"+res[i].Price+" | "+res[i].StockQuantity +" on hand");} //will list all of the items available pretty
 	console.log("-----------------------------------");})
 
-	mgrAction();
-}
+	mgrAction(); //restarts manager options
+}//end of viewItems
 function viewInventory(){
-	console.log("inv");
-
+	connection.query('SELECT * FROM Products WHERE StockQuantity <= 5',function(err,res){
+		for (var i = 0; i < res.length; i++){
+		console.log(res[i].ProductName+" | "+res[i].DepartmentName+" | "+ "$"+res[i].Price+" | "+res[i].StockQuantity +" on hand");
+		}//end of for loop
+    })//end of query function
 	mgrAction();
-}
+
+}//end of viewInventory
+
 function addInventory(){
 	console.log("add");
 
