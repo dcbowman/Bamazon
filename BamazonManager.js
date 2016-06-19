@@ -41,7 +41,7 @@ function viewItems(){
 		console.log(res[i].ProductName+" | "+res[i].DepartmentName+" | "+ "$"+res[i].Price+" | "+res[i].StockQuantity +" on hand");} //will list all of the items available pretty
 	console.log("-----------------------------------");})
 
-	mgrAction(); //restarts manager options
+	//mgrAction(); //restarts manager options
 }//end of viewItems
 function viewInventory(){
 	connection.query('SELECT * FROM Products WHERE StockQuantity <= 5',function(err,res){
@@ -49,18 +49,44 @@ function viewInventory(){
 		console.log(res[i].ProductName+" | "+res[i].DepartmentName+" | "+ "$"+res[i].Price+" | "+res[i].StockQuantity +" on hand");
 		}//end of for loop
     })//end of query function
-	mgrAction();
+	//mgrAction();
 
 }//end of viewInventory
 
 function addInventory(){
-	console.log("add");
+	console.log("added");
 
-	mgrAction();
+	//mgrAction();
 }
 function addProduct(){
-	console.log("product");
+	inquirer.prompt([{
+        type: 'input',
+        message: 'Please enter the item description to add',
+        name: 'itemDescription'
+       },{
+       	type:'input',
+       	message: 'Please enter the department',
+       	name: 'dept'
+       	},{
+       	type:'input',
+       	message: 'Please enter the price',
+       	name: 'custPrice'
+       	},{
+       	type:'input',
+       	message: 'What is the current quantity',
+       	name: 'stock'
+       }]).then(function (answers){
+       	
+   	connection.query("INSERT INTO products SET ?",{ProductName: answers.itemDescription, DepartmentName: answers.dept, Price: answers.custPrice, StockQuantity: answers.stock},function(err,res){
 
-	mgrAction();
+   		console.log("Item successfully added. Your new inventory:");
+   		viewItems(); //calls inventory function that will list all current inventory
+   	
+   		});//end of query function
+	
+       })// end of .then
+
+
+	//mgrAction();
 }
-
+//mgrAction();
