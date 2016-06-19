@@ -13,16 +13,20 @@ connection.connect(function(err){
     console.log("connected");//checks connection
     console.log();})
 
-connection.query('SELECT * FROM Products',function(err,res){
-	for(var i=0;i<res.length;i++){
-		console.log(res[i].ProductName+" | "+res[i].DepartmentName+" | "+res[i].Price+" | "+res[i].StockQuantity);} //will list all of the items available pretty
-	console.log("-----------------------------------");})
+// connection.query('SELECT * FROM Products',function(err,res){
+// 	for(var i=0;i<res.length;i++){
+// 		console.log(res[i].ProductName+" | "+res[i].DepartmentName+" | "+res[i].Price+" | "+res[i].StockQuantity);} //will list all of the items available pretty
+// 	console.log("-----------------------------------");})
 
 //runs the order function
 order();
 
 function order(){
-inquirer.prompt([{
+  connection.query('SELECT * FROM Products',function(err,res){
+  for(var i=0;i<res.length;i++){
+    console.log(res[i].ProductName+" | "+res[i].DepartmentName+" | "+res[i].Price+" | "+res[i].StockQuantity);} //will list all of the items available pretty
+    console.log("-----------------------------------");})
+     inquirer.prompt([{
         type: 'input',
         message: 'Which item would you like to purchase?',
         name: 'itemId'

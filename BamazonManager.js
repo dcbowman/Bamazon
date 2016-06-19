@@ -54,8 +54,25 @@ function viewInventory(){
 }//end of viewInventory
 
 function addInventory(){
-	console.log("added");
+	
+	inquirer.prompt([{
+	type:'input',
+       	message: 'Which item quantity are you updating?',
+       	name: 'theItem'
+       	},{
+       	type:'input',
+       	message: 'How much inventory are you adding?',
+       	name: 'addAmt'
+       }]).then(function (answers){
 
+      connection.query('SELECT * FROM Products WHERE ProductName = ?', answers.theItem, function(err,res){
+      	for (var i = 0; i < res.length; i++){
+		var newQuantity= (answers.addAmt + res[i].StockQuantity);
+		console.log(newQuantity);
+
+		}//end of for
+     })//end of query
+	})//end of .then
 	//mgrAction();
 }
 function addProduct(){
