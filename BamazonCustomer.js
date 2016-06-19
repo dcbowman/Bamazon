@@ -40,13 +40,15 @@ inquirer.prompt([{
   
        //checks to see if the quantity is enough
 
-          if (answers.quantity >= res[0].StockQuantity){
-            console.log("Sorry! Not enough to complete order! Select a different amount");
+          if (answers.quantity > res[0].StockQuantity){
+            console.log("Woops! That's a hot item! we dont have quite that many in stock. Please select another choice.");
 
             //restarts
             order();
           }else{
-            console.log("cool");
+            var total = answers.quantity * res[0].Price
+
+            console.log("Your total for "+answers.quantity +" "+ answers.itemId +" will be " +total +" dollars. Cheers!");
 
 
           }
