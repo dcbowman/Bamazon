@@ -39,17 +39,18 @@ inquirer.prompt([{
           //console.log(res);
   
        //checks to see if the quantity is enough
-
-          if (answers.quantity > res[0].StockQuantity){
+            if (answers.quantity > res[0].StockQuantity){
             console.log("Woops! That's a hot item! we dont have quite that many in stock. Please select another choice.");
 
             //restarts
             order();
           }else{
-            var total = answers.quantity * res[0].Price
+            var total = answers.quantity * res[0].Price //calculates the total price
 
             console.log("Your total for "+answers.quantity +" "+ answers.itemId +" will be " +total +" dollars. Cheers!");
 
+            //updates the inventory onhands
+            connection.query('UPDATE Products SET StockQuantity = "'+(res[0].StockQuantity - answers.quantity)+'" WHERE ProductName = "'+answers.itemId+'"');
 
           }
 
