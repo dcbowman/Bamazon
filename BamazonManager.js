@@ -41,7 +41,7 @@ function viewItems(){
 		console.log(res[i].ProductName+" | "+res[i].DepartmentName+" | "+ "$"+res[i].Price+" | "+res[i].StockQuantity +" on hand");} //will list all of the items available pretty
 	console.log("-----------------------------------");})
 
-	//mgrAction(); //restarts manager options
+	mgrAction(); //restarts manager options
 }//end of viewItems
 function viewInventory(){
 	connection.query('SELECT * FROM Products WHERE StockQuantity <= 5',function(err,res){
@@ -49,7 +49,7 @@ function viewInventory(){
 		console.log(res[i].ProductName+" | "+res[i].DepartmentName+" | "+ "$"+res[i].Price+" | "+res[i].StockQuantity +" on hand");
 		}//end of for loop
     })//end of query function
-	//mgrAction();
+	mgrAction();
 
 }//end of viewInventory
 
@@ -70,7 +70,9 @@ function addInventory(){
 		var newQuantity= parseInt(answers.addAmt) + res[i].StockQuantity;
 		//console.log(newQuantity);
 	 connection.query("UPDATE products SET ? WHERE ?",[{quantity:answers.theItem},{stockQuantity:newQuantity}],function(err,res){
-	 	console.log("Inventory on hands for "+ answers.theItem+" is now "+newQuantity);
+	 	console.log("Inventory on hand for "+ answers.theItem+" is now "+newQuantity);
+
+    mgrAction();
 	 });
 
 

@@ -55,10 +55,10 @@ function order(){
 
             //updates the inventory onhands
             connection.query('UPDATE Products SET StockQuantity = "'+(res[0].StockQuantity - answers.quantity)+'" WHERE ProductName = "'+answers.itemId+'"');
-
+           
           }
 
-
+        
 
         })//end of query
 
