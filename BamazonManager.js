@@ -54,7 +54,7 @@ function viewInventory(){
 }//end of viewInventory
 
 function addInventory(){
-	
+
 	inquirer.prompt([{
 	type:'input',
        	message: 'Which item quantity are you updating?',
@@ -67,8 +67,14 @@ function addInventory(){
 
       connection.query('SELECT * FROM Products WHERE ProductName = ?', answers.theItem, function(err,res){
       	for (var i = 0; i < res.length; i++){
-		var newQuantity= (answers.addAmt + res[i].StockQuantity);
-		console.log(newQuantity);
+		var newQuantity= parseInt(answers.addAmt) + res[i].StockQuantity;
+		//console.log(newQuantity);
+	 connection.query("UPDATE products SET ? WHERE ?",[{quantity:answers.theItem},{stockQuantity:newQuantity}],function(err,res){
+	 	console.log("Inventory on hands for "+ answers.theItem+" is now "+newQuantity);
+	 });
+
+
+     
 
 		}//end of for
      })//end of query
@@ -106,4 +112,4 @@ function addProduct(){
 
 	//mgrAction();
 }
-//mgrAction();
+
