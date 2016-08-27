@@ -1,5 +1,3 @@
-# Bamazon
-
 Technology used: Node.js MySQL, the  NPM packages MySQL, Prompt, Request and Inquirer
 
 
