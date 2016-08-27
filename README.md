@@ -1,6 +1,6 @@
 # Bamazon
 
-Technology used: MySQL, Node.js and NPM packages request and inquirer
+Technology used: Node.js MySQL, the  NPM packages MySQL, Prompt, Request and Inquirer
 
 
 Videos of working app:
